@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Script Precision | Master English</title>
+    <title>Script Precision | Professional English Tutors</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -17,97 +17,65 @@
         body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body>
+<body class="bg-gray-50">
     <div id="root"></div>
 
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // --- ICON SHIM (To make Gemini's Lucide tags work in a browser) ---
+        // --- ICON SHIM ---
         const Icon = ({ name, size = 24, className = "" }) => {
             useEffect(() => {
-                if (window.lucide) {
-                    window.lucide.createIcons();
-                }
+                if (window.lucide) { window.lucide.createIcons(); }
             }, [name]);
             return <i data-lucide={name} style={{width: size, height: size}} className={className}></i>;
         };
 
-        // --- 1. TEACHER DATA ---
+        // --- TEACHER DATA ---
         const TEACHERS = [
           {
-            id: 1,
-            name: "Anita P A",
-            country: "Nigeria",
-            flag: "🇳🇬",
-            accent: "Clear / Neutral",
-            rating: 5.0,
-            students: 120,
-            specialty: "Business English & Email Drafting",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Anita&backgroundColor=c0ade7",
-            bio: "University-educated professional. I specialize in helping professionals find the precise vocabulary needed for high-stakes client meetings."
+            id: 1, name: "Anita P A", flag: "🇳🇬", specialty: "Business English & Email Drafting",
+            rating: 5.0, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Anita&backgroundColor=c0ade7",
+            bio: "University-educated professional. I specialize in helping professionals find the precise vocabulary for high-stakes meetings."
           },
           {
-            id: 2,
-            name: "Vicky M",
-            country: "Nigeria",
-            flag: "🇳🇬",
-            accent: "Neutral / Professional",
-            rating: 4.9,
-            students: 95,
-            specialty: "IELTS Speaking Prep",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Vicky&backgroundColor=ffdfbf",
-            bio: "Expert in IELTS strategies. I help you find the exact structure needed to communicate with authority and confidence."
+            id: 2, name: "Vicky M", flag: "🇳🇬", specialty: "IELTS Speaking Prep",
+            rating: 4.9, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Vicky&backgroundColor=ffdfbf",
+            bio: "Expert in IELTS strategies. I help you find the exact structure needed to communicate with authority."
           },
           {
-            id: 3,
-            name: "Esther A",
-            country: "Nigeria",
-            flag: "🇳🇬",
-            accent: "Articulate / Academic",
-            rating: 5.0,
-            students: 210,
-            specialty: "Academic Writing & Speaking",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Esther&backgroundColor=b6e3f4",
-            bio: "Specializing in graduate school preparation. I focus on professional tone and polished clarity for academic success."
+            id: 3, name: "Esther A", flag: "🇳🇬", specialty: "Academic Writing & Speaking",
+            rating: 5.0, avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Esther&backgroundColor=b6e3f4",
+            bio: "Specializing in graduate school preparation with a focus on professional tone and polished clarity."
           }
         ];
 
-        // --- 2. MARKET CONFIGURATION ---
+        // --- MARKET CONFIG ---
         const MARKET_CONFIG = {
           english: {
             label: "English", flag: "🇺🇸", currency: "$", currencyCode: "USD", price: 15, duration: "45 min",
             platform: "Zoom / Google Meet", paymentMethods: "Stripe / PayPal", contactMethod: "Email: ScriptPrecision@Gmail.com",
-            navHome: "Home", navPricing: "Pricing", navAbout: "About Us", navLogin: "Log In", navSignup: "Sign Up",
-            heroTitle: "Master English with Precision", heroSubtitle: "Script Precision: Master English with precision and meticulously crafted lessons, where every word is chosen for purpose and every structure builds confidence.",
-            ctaButton: "Start Learning Now", problemTitle: "The Problem", problemText: "Students possess a solid foundation in English, but they consistently struggle with finding the precise vocabulary, structure, and professional tone needed to communicate with authority.",
-            solutionTitle: "The Solution", solutionText: "With Script Precision, you'll practice and perfect the exact language needed for client interactions, giving you the confidence to handle any meeting agenda with polished, professional clarity.",
-            uspTitle: "Our USP", uspText: "Clear, neutral accents and exceptional university education. Our Nigerian tutors are selected specifically for their articulate teaching style.",
-            step1: "Sign Up", step2: "Buy Credits", step3: "Book Tutor", step4: "Connect"
+            navHome: "Home", navPricing: "Pricing", navAbout: "About Us", navSignup: "Sign Up",
+            heroTitle: "Master English with Precision", 
+            heroSubtitle: "Every word chosen for purpose, every structure builds confidence."
           },
           china: {
             label: "China", flag: "🇨🇳", currency: "¥", currencyCode: "RMB", price: 100, duration: "45 min",
             platform: "VooV Meeting (Tencent)", paymentMethods: "WeChat Pay / Alipay", contactMethod: "WeChat ID: ScriptPrecision",
-            navHome: "首页", navPricing: "课程价格", navAbout: "关于我们", navLogin: "登录", navSignup: "注册",
-            heroTitle: "精准掌握英语", heroSubtitle: "Script Precision：精准掌握英语，精心打造每一堂课，字斟句酌，构建自信。",
-            ctaButton: "立即开始学习", problemTitle: "痛点", problemText: "学生拥有扎实的英语基础，但在高风险的职业或学术场合中，往往难以找到精准的词汇和专业的语气来自信地表达。",
-            solutionTitle: "解决方案", solutionText: "通过 Script Precision，您将练习并完善客户互动所需的准确语言，从而自信地处理任何会议议程。",
-            uspTitle: "我们的优势", uspText: "清晰、中立的口音和卓越的大学教育背景。我们的尼日利亚导师是因其清晰的教学风格而被特别选拔的。",
-            step1: "注册账号", step2: "购买课时", step3: "预约导师", step4: "开始上课"
+            navHome: "首页", navPricing: "课程价格", navAbout: "关于我们", navSignup: "注册",
+            heroTitle: "精准掌握英语", 
+            heroSubtitle: "精心打造每一堂课，字斟句酌，构建自信。"
           },
           brazil: {
             label: "Brazil", flag: "🇧🇷", currency: "R$", currencyCode: "BRL", price: 85, duration: "45 min",
             platform: "Google Meet", paymentMethods: "Pix / PayPal", contactMethod: "WhatsApp / Email",
-            navHome: "Início", navPricing: "Preços", navAbout: "Sobre Nós", navLogin: "Entrar", navSignup: "Cadastrar",
-            heroTitle: "Domine o Inglês com Precisão", heroSubtitle: "Script Precision: Domine o inglês com precisão e aulas meticulosamente elaboradas, onde cada palavra é escolhida com propósito.",
-            ctaButton: "Comece Agora", problemTitle: "O Problema", problemText: "Alunos possuem uma base sólida em inglês, mas lutam para encontrar o vocabulário preciso e o tom profissional necessário.",
-            solutionTitle: "A Solução", solutionText: "Com a Script Precision, você praticará a linguagem exata necessária para interações com clientes.",
-            uspTitle: "Nosso Diferencial", uspText: "Sotaques claros e neutros e educação universitária excepcional.",
-            step1: "Cadastre-se", step2: "Compre Créditos", step3: "Agende", step4: "Conecte-se"
+            navHome: "Início", navPricing: "Preços", navAbout: "Sobre Nós", navSignup: "Cadastrar",
+            heroTitle: "Domine o Inglês com Precisão", 
+            heroSubtitle: "Aulas meticulosamente elaboradas para sua confiança."
           }
         };
 
-        // --- 3. COMPONENTS ---
+        // --- COMPONENTS ---
 
         const Navbar = ({ setPage, market, setMarket }) => {
           const t = MARKET_CONFIG[market];
@@ -118,21 +86,22 @@
                   <div className="w-8 h-8 bg-teal-400 rounded-lg flex items-center justify-center text-indigo-900">
                     <Icon name="globe" size={20} />
                   </div>
-                  <span>Script Precision</span>
+                  <span className="hidden sm:inline">Script Precision</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="flex bg-indigo-800 rounded-full p-1 border border-indigo-600">
-                      {['english', 'brazil', 'china'].map(m => (
-                          <button key={m} onClick={() => setMarket(m)} className={`px-3 py-1 text-xs font-bold rounded-full transition ${market === m ? 'bg-white text-indigo-900' : 'text-gray-400'}`}>
-                              {MARKET_CONFIG[m].flag} {m.slice(0,2).toUpperCase()}
+                  <div className="flex bg-indigo-800 rounded-full p-1 border border-indigo-600 mr-2">
+                      {Object.keys(MARKET_CONFIG).map(m => (
+                          <button key={m} onClick={() => setMarket(m)} className={`px-2 py-1 text-[10px] font-bold rounded-full transition ${market === m ? 'bg-white text-indigo-900' : 'text-gray-400'}`}>
+                              {MARKET_CONFIG[m].flag}
                           </button>
                       ))}
                   </div>
-                  <div className="hidden md:flex gap-4 items-center text-sm">
-                      <button onClick={() => setPage('home')}>{t.navHome}</button>
-                      <button onClick={() => setPage('pricing')}>{t.navPricing}</button>
-                      <button onClick={() => setPage('tutors')}>Tutors</button>
-                      <button onClick={() => setPage('contact-signup')} className="px-4 py-1.5 bg-teal-500 text-indigo-900 rounded-full font-bold">{t.navSignup}</button>
+                  <div className="flex gap-3 md:gap-6 items-center text-xs md:text-sm font-medium">
+                      <button onClick={() => setPage('home')} className="hover:text-teal-400">{t.navHome}</button>
+                      <button onClick={() => setPage('pricing')} className="hover:text-teal-400">{t.navPricing}</button>
+                      <button onClick={() => setPage('about')} className="hover:text-teal-400">{t.navAbout}</button>
+                      <button onClick={() => setPage('connect')} className="hover:text-teal-400">Connect</button>
+                      <button onClick={() => setPage('signup')} className="px-4 py-2 bg-teal-500 text-indigo-900 rounded-full font-bold">{t.navSignup}</button>
                   </div>
                 </div>
               </div>
@@ -140,57 +109,113 @@
           );
         };
 
+        const AboutPage = () => (
+          <div className="max-w-4xl mx-auto py-20 px-6">
+            <h1 className="text-4xl font-extrabold text-indigo-900 mb-8">About Us</h1>
+            <div className="prose prose-lg text-gray-700 leading-relaxed space-y-6">
+                <p>
+                    Script Precision is founded by the <strong>Zudinah Ventures Group</strong>, 
+                    dedicated to providing excellence in teaching and bringing quality service 
+                    to a field in high demand, all at affordable prices.
+                </p>
+                <div className="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-teal-500 my-10">
+                    <h3 className="text-2xl font-bold text-indigo-900 mb-4 flex items-center gap-2">
+                        <Icon name="users" className="text-teal-500" /> Our Founders
+                    </h3>
+                    <p className="mb-4 text-gray-800 font-medium">
+                        <strong>Peter Azura</strong> — A Lawyer with extensive international experience.
+                    </p>
+                    <p className="text-gray-800 font-medium">
+                        <strong>Anita Azura</strong> — An Expert English Teacher with a passion for precise communication.
+                    </p>
+                    <p className="mt-4 text-gray-600 italic border-t pt-4">
+                        Together, they created a platform that merges professional legal/business standards with educational excellence.
+                    </p>
+                </div>
+            </div>
+          </div>
+        );
+
+        const ConnectPage = ({ config }) => (
+            <div className="max-w-5xl mx-auto py-20 px-6">
+                <h1 className="text-4xl font-extrabold text-center mb-12 text-indigo-900">Connect With Us</h1>
+                <div className="grid md:grid-cols-2 gap-10">
+                    <div className="space-y-6 bg-white p-8 rounded-2xl shadow-md border border-gray-100">
+                        <h3 className="text-xl font-bold border-b pb-4">Social Media</h3>
+                        <div className="space-y-4">
+                            {[
+                                {icon: 'instagram', label: '@ScriptPrecision'},
+                                {icon: 'facebook', label: 'Script Precision'},
+                                {icon: 'linkedin', label: 'Script Precision'},
+                                {icon: 'globe', label: 'Xiaohongshu: ScriptPrecision'}
+                            ].map(item => (
+                                <div key={item.label} className="flex items-center gap-4 text-gray-700 hover:text-teal-600 cursor-pointer transition">
+                                    <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center"><Icon name={item.icon} size={18} /></div>
+                                    <span className="font-medium">{item.label}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="bg-indigo-900 text-white p-8 rounded-2xl shadow-xl space-y-6">
+                        <h3 className="text-xl font-bold border-b border-indigo-700 pb-4">Direct Contact</h3>
+                        <div className="space-y-6">
+                            <div className="flex items-center gap-4">
+                                <Icon name="mail" className="text-teal-400" />
+                                <div><p className="text-xs text-indigo-300">Email Address</p><p className="font-bold">ScriptPrecision@Gmail.com</p></div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <Icon name="message-square" className="text-teal-400" />
+                                <div><p className="text-xs text-indigo-300">WeChat ID</p><p className="font-bold">ScriptPrecision</p></div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <Icon name="phone" className="text-teal-400" />
+                                <div><p className="text-xs text-indigo-300">WhatsApp / Phone</p><p className="font-bold">+234 8026574515</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
         const LandingPage = ({ setPage, config }) => (
           <div>
-            <header className="bg-indigo-900 text-white pt-20 pb-32 px-6 text-center">
-              <h1 className="text-4xl md:text-6xl font-extrabold mb-6">{config.heroTitle}</h1>
-              <p className="text-xl text-gray-200 mb-10 max-w-2xl mx-auto italic">{config.heroSubtitle}</p>
-              <button onClick={() => setPage('contact-signup')} className="px-8 py-4 bg-teal-500 text-indigo-900 font-bold rounded-full text-lg shadow-lg transform hover:scale-105 transition">
-                {config.ctaButton}
-              </button>
+            <header className="bg-indigo-900 text-white pt-24 pb-40 px-6 text-center">
+              <div className="max-w-4xl mx-auto">
+                <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">{config.heroTitle}</h1>
+                <p className="text-xl text-indigo-200 mb-10 max-w-2xl mx-auto leading-relaxed italic">"{config.heroSubtitle}"</p>
+                <button onClick={() => setPage('tutors')} className="px-10 py-5 bg-teal-500 text-indigo-900 font-black rounded-full text-xl shadow-2xl hover:bg-teal-400 transition transform hover:scale-105">
+                    Meet Your Tutors
+                </button>
+              </div>
             </header>
-            <section className="py-12 px-6 max-w-6xl mx-auto -mt-16 grid md:grid-cols-3 gap-8">
-                {[
-                    {title: config.problemTitle, text: config.problemText, icon: "info", color: "indigo"},
-                    {title: config.solutionTitle, text: config.solutionText, icon: "check-circle", color: "teal"},
-                    {title: config.uspTitle, text: config.uspText, icon: "star", color: "purple"}
-                ].map((item, i) => (
-                    <div key={i} className="bg-white p-8 rounded-2xl shadow-xl border-b-4" style={{borderColor: item.color}}>
-                        <Icon name={item.icon} className={`text-${item.color}-600 mb-4`} />
-                        <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                        <p className="text-gray-600 text-sm">{item.text}</p>
+            <div className="max-w-6xl mx-auto -mt-20 px-6 grid md:grid-cols-3 gap-8 pb-20">
+                {TEACHERS.map(t => (
+                    <div key={t.id} className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
+                        <div className="p-8 flex flex-col items-center text-center flex-grow">
+                            <img src={t.avatar} className="w-24 h-24 rounded-full bg-indigo-50 mb-4 border-4 border-white shadow-md" />
+                            <h3 className="font-bold text-2xl text-indigo-900 mb-1">{t.name} {t.flag}</h3>
+                            <div className="flex items-center gap-1 text-yellow-500 mb-4"><Icon name="star" size={14} fill="currentColor" /> {t.rating}</div>
+                            <p className="text-gray-600 text-sm leading-relaxed">{t.bio}</p>
+                        </div>
+                        <button onClick={() => setPage('pricing')} className="w-full py-4 bg-gray-50 text-indigo-600 font-bold hover:bg-indigo-50 border-t">View Pricing</button>
                     </div>
                 ))}
-            </section>
+            </div>
           </div>
         );
 
         const PricingPage = ({ config, setPage }) => (
             <div className="max-w-4xl mx-auto py-20 px-6 text-center">
-                <h2 className="text-4xl font-bold mb-10">Transparent Pricing for {config.label}</h2>
-                <div className="bg-white rounded-3xl shadow-2xl p-10 border-4 border-teal-500 inline-block w-full max-w-md">
-                    <span className="text-6xl font-black text-indigo-900">{config.currency}{config.price}</span>
-                    <p className="text-gray-500 mb-8">per {config.duration} lesson</p>
-                    <button onClick={() => setPage('payment')} className="w-full py-4 bg-indigo-900 text-white rounded-xl font-bold">Buy Credits</button>
-                </div>
-            </div>
-        );
-
-        const TutorsPage = ({ config, setPage }) => (
-            <div className="max-w-6xl mx-auto py-20 px-6">
-                <h2 className="text-3xl font-bold mb-10 text-center">Meet Our Professional Tutors</h2>
-                <div className="grid md:grid-cols-3 gap-8">
-                    {TEACHERS.map(t => (
-                        <div key={t.id} className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
-                            <img src={t.avatar} className="w-full h-48 bg-indigo-50" />
-                            <div className="p-6">
-                                <h3 className="font-bold text-xl">{t.name} {t.flag}</h3>
-                                <p className="text-teal-600 text-xs font-bold mb-3">{t.specialty}</p>
-                                <p className="text-gray-600 text-sm mb-4">{t.bio}</p>
-                                <button onClick={() => setPage('payment')} className="w-full py-2 bg-gray-900 text-white rounded-lg text-sm">Book Lesson</button>
-                            </div>
-                        </div>
-                    ))}
+                <h2 className="text-4xl font-black text-indigo-900 mb-4">Pricing for {config.label}</h2>
+                <div className="bg-white rounded-3xl shadow-2xl p-12 border-4 border-teal-500 inline-block w-full max-w-md relative overflow-hidden">
+                    <div className="absolute top-0 right-0 bg-teal-500 text-indigo-900 px-4 py-1 font-bold rounded-bl-xl text-xs uppercase">Best Value</div>
+                    <span className="text-7xl font-black text-indigo-900">{config.currency}{config.price}</span>
+                    <p className="text-gray-500 font-medium mb-8">per {config.duration} lesson</p>
+                    <ul className="text-left space-y-4 mb-10 text-gray-600 font-medium">
+                        <li className="flex gap-2"><Icon name="check" className="text-teal-500" /> Platform: {config.platform}</li>
+                        <li className="flex gap-2"><Icon name="check" className="text-teal-500" /> Payment: {config.paymentMethods}</li>
+                    </ul>
+                    <button onClick={() => setPage('signup')} className="w-full py-4 bg-indigo-900 text-white rounded-2xl font-bold shadow-lg">Buy Credits Now</button>
                 </div>
             </div>
         );
@@ -203,30 +228,43 @@
           useEffect(() => { window.scrollTo(0, 0); }, [currentPage]);
 
           return (
-            <div className="min-h-screen bg-gray-50 flex flex-col">
+            <div className="min-h-screen bg-gray-50 flex flex-col text-gray-900">
               <Navbar setPage={setCurrentPage} market={market} setMarket={setMarket} />
               <main className="flex-grow">
                 {currentPage === 'home' && <LandingPage setPage={setCurrentPage} config={config} />}
                 {currentPage === 'pricing' && <PricingPage config={config} setPage={setCurrentPage} />}
-                {currentPage === 'tutors' && <TutorsPage config={config} setPage={setCurrentPage} />}
-                {currentPage === 'contact-signup' && (
-                    <div className="py-20 text-center">
-                        <h2 className="text-3xl font-bold mb-4">Ready to Start?</h2>
-                        <p className="mb-6">Email us to create your account</p>
-                        <div className="bg-indigo-900 text-white p-6 rounded-xl inline-block font-mono">{config.contactMethod}</div>
+                {currentPage === 'about' && <AboutPage />}
+                {currentPage === 'connect' && <ConnectPage config={config} />}
+                {currentPage === 'signup' && (
+                    <div className="py-20 text-center max-w-xl mx-auto px-6">
+                        <Icon name="mail" size={48} className="mx-auto mb-6 text-teal-500" />
+                        <h2 className="text-3xl font-bold mb-4 text-indigo-900">Ready to Start?</h2>
+                        <p className="text-gray-600 mb-8">Simply send us an email to set up your account and get your Student ID.</p>
+                        <div className="bg-indigo-900 text-white p-8 rounded-2xl font-mono text-xl shadow-xl">{config.contactMethod}</div>
                     </div>
                 )}
-                {currentPage === 'payment' && (
-                    <div className="py-20 text-center max-w-md mx-auto px-6">
-                        <Icon name="credit-card" size={48} className="mx-auto mb-4 text-teal-500" />
-                        <h2 className="text-2xl font-bold mb-4">Payment Methods</h2>
-                        <p className="bg-white p-4 rounded border">We accept <strong>{config.paymentMethods}</strong>. Contact us at the ID below to receive your payment link.</p>
-                        <div className="mt-4 font-bold text-indigo-600">{config.contactMethod}</div>
+                {currentPage === 'tutors' && (
+                    <div className="py-20 max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+                         {TEACHERS.map(t => (
+                            <div key={t.id} className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center">
+                                <img src={t.avatar} className="w-32 h-32 rounded-full mb-6" />
+                                <h3 className="font-bold text-2xl mb-2">{t.name}</h3>
+                                <p className="text-teal-600 font-bold text-xs mb-4 uppercase tracking-widest">{t.specialty}</p>
+                                <p className="text-gray-600 text-center text-sm mb-6">{t.bio}</p>
+                                <button onClick={() => setPage('signup')} className="mt-auto w-full py-3 bg-indigo-900 text-white rounded-xl font-bold">Book Now</button>
+                            </div>
+                        ))}
                     </div>
                 )}
               </main>
-              <footer className="bg-indigo-900 text-white py-10 text-center text-sm opacity-80">
-                <p>© 2024 Script Precision - Zudinah Ventures Group</p>
+              <footer className="bg-indigo-900 text-white py-12 text-center text-sm">
+                <p className="font-bold text-lg mb-2">Script Precision</p>
+                <p className="opacity-60 mb-4">Founded by Zudinah Ventures Group</p>
+                <div className="flex justify-center gap-6 opacity-60">
+                    <span>Peter Azura</span>
+                    <span>•</span>
+                    <span>Anita Azura</span>
+                </div>
               </footer>
             </div>
           );
