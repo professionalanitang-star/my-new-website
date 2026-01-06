@@ -1,5 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
   BookOpen, Video, Calendar, CreditCard, User, LogOut, Globe, 
   MessageSquare, CheckCircle, Menu, Star, Clock, Info, 
   Briefcase, Mail, Phone, FileText, Users, HelpCircle, MapPin, 
@@ -482,3 +495,20 @@ const App = () => {
 };
 
 export default App;
+
+        const { useState, useEffect } = React;
+
+        function App() {
+            return (
+                <div className="p-10 text-center">
+                    <h1 className="text-4xl font-bold">Site is Loading...</h1>
+                    <p>Paste your Gemini logic here!</p>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
