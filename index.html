@@ -1,288 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Script Precision | Professional English Tutors</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Script Precision | Professional English Tutors</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+body { font-family: 'Inter', sans-serif; }
+</style>
 </head>
 <body class="bg-gray-50">
-    <div id="root"></div>
+<div id="root"></div>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
+<script type="text/babel">
+const { useState, useEffect } = React;
 
-        const Icon = ({ name, size = 24, className = "" }) => {
-            useEffect(() => { if (window.lucide) { window.lucide.createIcons(); } }, [name]);
-            return <i data-lucide={name} style={{width: size, height: size}} className={className}></i>;
-        };
+const Icon = ({ name, size = 24, className = "" }) => {
+useEffect(() => { if (window.lucide) { window.lucide.createIcons(); } }, [name]);
+return <i data-lucide={name} style={{width: size, height: size}} className={className}></i>;
+};
 
-        // --- 1. TEACHER DATA (Replace the avatar links here) ---
-       const TEACHERS = [
-          {
-            id: 1, name: "Anita P A", flag: "🇳🇬", specialty: "Business English & Email Drafting",
-            rating: 5.0, 
+// --- 1. TEACHER DATA (Replace the avatar links here) ---
+const TEACHERS = [
+{
+id: 1, name: "Anita P A", flag: "🇳🇬", specialty: "Business English & Email Drafting",
+rating: 5.0, 
+            avatar: "https://raw.githubusercontent.com/professionalanitang-star/my-new-website/main/anita.png", 
             avatar: "https://github.com/professionalanitang-star/my-new-website/blob/main/anita.jpg?raw=true", 
-            bio: "University-educated professional. I specialize in helping professionals find the precise vocabulary for high-stakes meetings."
-          },
-          {
-            id: 2, name: "Vicky M", flag: "🇳🇬", specialty: "IELTS Speaking Prep",
-            rating: 4.9, 
-            avatar: "https://github.com/professionalanitang-star/my-new-website/blob/main/vicky.jpg?raw=true", 
-            bio: "Expert in IELTS strategies. I help you find the exact structure needed to communicate with authority."
-          },
-          {
-            id: 3, name: "Esther A", flag: "🇳🇬", specialty: "Academic Writing & Speaking",
-            rating: 5.0, 
+bio: "University-educated professional. I specialize in helping professionals find the precise vocabulary for high-stakes meetings."
+},
+{
+id: 2, name: "Vicky M", flag: "🇳🇬", specialty: "IELTS Speaking Prep",
+rating: 4.9, 
+avatar: "https://github.com/professionalanitang-star/my-new-website/blob/main/vicky.jpg?raw=true", 
+bio: "Expert in IELTS strategies. I help you find the exact structure needed to communicate with authority."
+},
+{
+id: 3, name: "Esther A", flag: "🇳🇬", specialty: "Academic Writing & Speaking",
+rating: 5.0, 
+            avatar: "https://raw.githubusercontent.com/professionalanitang-star/my-new-website/main/esther.png", 
             avatar: "https://github.com/professionalanitang-star/my-new-website/blob/main/esther.jpg?raw=true", 
-            bio: "Specializing in graduate school preparation with a focus on professional tone and polished clarity."
-          }
-        ];
+bio: "Specializing in graduate school preparation with a focus on professional tone and polished clarity."
+}
+];
 
-        const MARKET_CONFIG = {
-          english: {
-            label: "English", flag: "🇺🇸", currency: "$", currencyCode: "USD", price: 15, duration: "45 min",
-            platform: "Zoom / Google Meet", paymentMethods: "Stripe / PayPal", contactMethod: "Email: ScriptPrecision@Gmail.com",
-            navHome: "Home", navPricing: "Pricing", navAbout: "About Us", navSignup: "Sign Up",
-            heroTitle: "Master English with Precision", 
-            heroSubtitle: "Every word chosen for purpose, every structure builds confidence."
-          },
-          china: {
-            label: "China", flag: "🇨🇳", currency: "¥", currencyCode: "RMB", price: 100, duration: "45 min",
-            platform: "VooV Meeting (Tencent)", paymentMethods: "WeChat Pay / Alipay", contactMethod: "WeChat ID: ScriptPrecision",
-            navHome: "首页", navPricing: "课程价格", navAbout: "关于我们", navSignup: "注册",
-            heroTitle: "精准掌握英语", 
-            heroSubtitle: "精心打造每一堂课，字斟句酌，构建自信。"
-          },
-          brazil: {
-            label: "Brazil", flag: "🇧🇷", currency: "R$", currencyCode: "BRL", price: 85, duration: "45 min",
-            platform: "Google Meet", paymentMethods: "Pix / PayPal", contactMethod: "WhatsApp / Email",
-            navHome: "Início", navPricing: "Preços", navAbout: "Sobre Nós", navSignup: "Cadastrar",
-            heroTitle: "Domine o Inglês com Precisão", 
-            heroSubtitle: "Aulas meticulosamente elaboradas para sua confiança."
-          }
-        };
+const MARKET_CONFIG = {
+english: {
+label: "English", flag: "🇺🇸", currency: "$", currencyCode: "USD", price: 15, duration: "45 min",
+platform: "Zoom / Google Meet", paymentMethods: "Stripe / PayPal", contactMethod: "Email: ScriptPrecision@Gmail.com",
+navHome: "Home", navPricing: "Pricing", navAbout: "About Us", navSignup: "Sign Up",
+heroTitle: "Master English with Precision", 
+heroSubtitle: "Every word chosen for purpose, every structure builds confidence."
+},
+china: {
+label: "China", flag: "🇨🇳", currency: "¥", currencyCode: "RMB", price: 100, duration: "45 min",
+platform: "VooV Meeting (Tencent)", paymentMethods: "WeChat Pay / Alipay", contactMethod: "WeChat ID: ScriptPrecision",
+navHome: "首页", navPricing: "课程价格", navAbout: "关于我们", navSignup: "注册",
+heroTitle: "精准掌握英语", 
+heroSubtitle: "精心打造每一堂课，字斟句酌，构建自信。"
+},
+brazil: {
+label: "Brazil", flag: "🇧🇷", currency: "R$", currencyCode: "BRL", price: 85, duration: "45 min",
+platform: "Google Meet", paymentMethods: "Pix / PayPal", contactMethod: "WhatsApp / Email",
+navHome: "Início", navPricing: "Preços", navAbout: "Sobre Nós", navSignup: "Cadastrar",
+heroTitle: "Domine o Inglês com Precisão", 
+heroSubtitle: "Aulas meticulosamente elaboradas para sua confiança."
+}
+};
 
-        const Navbar = ({ setPage, market, setMarket }) => {
-          const t = MARKET_CONFIG[market];
-          return (
-            <nav className="bg-indigo-900 text-white p-4 shadow-lg sticky top-0 z-50">
-              <div className="max-w-7xl mx-auto flex justify-between items-center">
-                <div className="flex items-center gap-2 font-bold text-xl cursor-pointer" onClick={() => setPage('home')}>
-                  <div className="w-8 h-8 bg-teal-400 rounded-lg flex items-center justify-center text-indigo-900">
-                    <Icon name="globe" size={20} />
-                  </div>
-                  <span className="hidden sm:inline">Script Precision</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="flex bg-indigo-800 rounded-full p-1 border border-indigo-600 mr-2">
-                      {Object.keys(MARKET_CONFIG).map(m => (
-                          <button key={m} onClick={() => setMarket(m)} className={`px-2 py-1 text-[10px] font-bold rounded-full transition ${market === m ? 'bg-white text-indigo-900' : 'text-gray-400'}`}>
-                              {MARKET_CONFIG[m].flag}
-                          </button>
-                      ))}
-                  </div>
-                  <div className="flex gap-4 md:gap-6 items-center text-xs md:text-sm font-medium">
-                      <button onClick={() => setPage('home')}>{t.navHome}</button>
-                      <button onClick={() => setPage('pricing')}>{t.navPricing}</button>
-                      <button onClick={() => setPage('about')}>{t.navAbout}</button>
-                      <button onClick={() => setPage('connect')}>Connect</button>
-                      <button onClick={() => setPage('signup')} className="px-4 py-2 bg-teal-500 text-indigo-900 rounded-full font-bold">{t.navSignup}</button>
-                  </div>
-                </div>
-              </div>
-            </nav>
-          );
-        };
+const Navbar = ({ setPage, market, setMarket }) => {
+const t = MARKET_CONFIG[market];
+return (
+<nav className="bg-indigo-900 text-white p-4 shadow-lg sticky top-0 z-50">
+<div className="max-w-7xl mx-auto flex justify-between items-center">
+<div className="flex items-center gap-2 font-bold text-xl cursor-pointer" onClick={() => setPage('home')}>
+<div className="w-8 h-8 bg-teal-400 rounded-lg flex items-center justify-center text-indigo-900">
+<Icon name="globe" size={20} />
+</div>
+<span className="hidden sm:inline">Script Precision</span>
+</div>
+<div className="flex items-center gap-4">
+<div className="flex bg-indigo-800 rounded-full p-1 border border-indigo-600 mr-2">
+{Object.keys(MARKET_CONFIG).map(m => (
+<button key={m} onClick={() => setMarket(m)} className={`px-2 py-1 text-[10px] font-bold rounded-full transition ${market === m ? 'bg-white text-indigo-900' : 'text-gray-400'}`}>
+{MARKET_CONFIG[m].flag}
+</button>
+))}
+</div>
+<div className="flex gap-4 md:gap-6 items-center text-xs md:text-sm font-medium">
+<button onClick={() => setPage('home')}>{t.navHome}</button>
+<button onClick={() => setPage('pricing')}>{t.navPricing}</button>
+<button onClick={() => setPage('about')}>{t.navAbout}</button>
+<button onClick={() => setPage('connect')}>Connect</button>
+<button onClick={() => setPage('signup')} className="px-4 py-2 bg-teal-500 text-indigo-900 rounded-full font-bold">{t.navSignup}</button>
+</div>
+</div>
+</div>
+</nav>
+);
+};
 
-        const AboutPage = () => (
-          <div className="max-w-4xl mx-auto py-20 px-6">
-            <h1 className="text-4xl font-extrabold text-indigo-900 mb-8">About Us</h1>
-            <div className="prose prose-lg text-gray-700 leading-relaxed space-y-6">
-                <p>
-                    Script Precision is founded by the <strong>Zudinah Ventures Group</strong>, 
-                    dedicated to providing excellence in teaching and bringing quality service 
-                    to a field in high demand, all at affordable prices.
-                </p>
-                <div className="bg-white p-10 rounded-3xl shadow-xl border-t-8 border-teal-500 my-10">
-                    <h3 className="text-2xl font-bold text-indigo-900 mb-4 flex items-center gap-2">
-                        <Icon name="briefcase" className="text-teal-500" /> Zudinah Ventures Group
-                    </h3>
-                    <p className="text-gray-600">
-                        Our group merges professional standards with educational excellence. 
-                        By combining legal, business, and educational expertise, we have created a platform 
-                        that ensures every lesson is delivered with precision and professional clarity.
-                    </p>
-                </div>
-            </div>
-          </div>
-        );
+const AboutPage = () => (
+<div className="max-w-4xl mx-auto py-20 px-6">
+<h1 className="text-4xl font-extrabold text-indigo-900 mb-8">About Us</h1>
+<div className="prose prose-lg text-gray-700 leading-relaxed space-y-6">
+<p>
+Script Precision is founded by the <strong>Zudinah Ventures Group</strong>, 
+dedicated to providing excellence in teaching and bringing quality service 
+to a field in high demand, all at affordable prices.
+</p>
+<div className="bg-white p-10 rounded-3xl shadow-xl border-t-8 border-teal-500 my-10">
+<h3 className="text-2xl font-bold text-indigo-900 mb-4 flex items-center gap-2">
+<Icon name="briefcase" className="text-teal-500" /> Zudinah Ventures Group
+</h3>
+<p className="text-gray-600">
+Our group merges professional standards with educational excellence. 
+By combining legal, business, and educational expertise, we have created a platform 
+that ensures every lesson is delivered with precision and professional clarity.
+</p>
+</div>
+</div>
+</div>
+);
 
-       const ConnectPage = ({ config }) => (
-            <div className="max-w-5xl mx-auto py-20 px-6">
-                <h1 className="text-4xl font-extrabold text-center mb-12 text-indigo-900">Connect With Us</h1>
-                <div className="grid md:grid-cols-2 gap-10">
-                    
-                    {/* LEFT SIDE: DIRECT CONTACT */}
-                    <div className="bg-indigo-900 text-white p-8 rounded-2xl shadow-xl space-y-6">
-                        <h3 className="text-xl font-bold border-b border-indigo-700 pb-4">Direct Contact</h3>
-                        <div className="space-y-6">
-                            
-                            {/* EMAIL LINK (mailto:) */}
-                            <a href="mailto:ScriptPrecision@Gmail.com" className="flex items-center gap-4 hover:text-teal-400 transition cursor-pointer">
-                                <Icon name="mail" className="text-teal-400" />
-                                <div><p className="text-xs text-indigo-300">Email Address</p><p className="font-bold">ScriptPrecision@Gmail.com</p></div>
-                            </a>
+const ConnectPage = ({ config }) => (
+<div className="max-w-5xl mx-auto py-20 px-6">
+<h1 className="text-4xl font-extrabold text-center mb-12 text-indigo-900">Connect With Us</h1>
+<div className="grid md:grid-cols-2 gap-10">
+<div className="bg-indigo-900 text-white p-8 rounded-2xl shadow-xl space-y-6">
+<h3 className="text-xl font-bold border-b border-indigo-700 pb-4">Direct Contact</h3>
+<div className="space-y-6">
+<div className="flex items-center gap-4">
+<Icon name="mail" className="text-teal-400" />
+<div><p className="text-xs text-indigo-300">Email Address</p><p className="font-bold">ScriptPrecision@Gmail.com</p></div>
+</div>
+<div className="flex items-center gap-4">
+<Icon name="message-square" className="text-teal-400" />
+<div><p className="text-xs text-indigo-300">WeChat ID</p><p className="font-bold">ScriptPrecision</p></div>
+</div>
+<div className="flex items-center gap-4">
+<Icon name="phone" className="text-teal-400" />
+<div><p className="text-xs text-indigo-300">WhatsApp / Phone</p><p className="font-bold">+234 8026574515</p></div>
+</div>
+</div>
+</div>
+<div className="space-y-6 bg-white p-8 rounded-2xl shadow-md border border-gray-100">
+<h3 className="text-xl font-bold border-b pb-4">Social Media</h3>
+<div className="space-y-4">
+{['instagram', 'facebook', 'linkedin', 'globe'].map(icon => (
+<div key={icon} className="flex items-center gap-4 text-gray-700 hover:text-teal-600 cursor-pointer transition">
+<div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center"><Icon name={icon} size={18} /></div>
+<span className="font-medium capitalize">{icon === 'globe' ? 'Xiaohongshu' : icon}</span>
+</div>
+))}
+</div>
+</div>
+</div>
+</div>
+);
 
-                            {/* WECHAT (Copy Instruction) */}
-                            <div className="flex items-center gap-4">
-                                <Icon name="message-square" className="text-teal-400" />
-                                <div><p className="text-xs text-indigo-300">WeChat ID</p><p className="font-bold">ScriptPrecision</p></div>
-                            </div>
+const LandingPage = ({ setPage, config }) => (
+<div>
+<header className="bg-indigo-900 text-white pt-24 pb-40 px-6 text-center">
+<div className="max-w-4xl mx-auto">
+<h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">{config.heroTitle}</h1>
+<p className="text-xl text-indigo-200 mb-10 max-w-2xl mx-auto leading-relaxed italic">"{config.heroSubtitle}"</p>
+<button onClick={() => setPage('tutors')} className="px-10 py-5 bg-teal-500 text-indigo-900 font-black rounded-full text-xl shadow-2xl hover:bg-teal-400 transition transform hover:scale-105">
+Meet Your Tutors
+</button>
+</div>
+</header>
+<div className="max-w-6xl mx-auto -mt-20 px-6 grid md:grid-cols-3 gap-8 pb-20">
+{TEACHERS.map(t => (
+<div key={t.id} className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
+<div className="p-8 flex flex-col items-center text-center flex-grow">
+<img src={t.avatar} className="w-32 h-32 rounded-full bg-indigo-50 mb-4 border-4 border-white shadow-md object-cover" />
+<h3 className="font-bold text-2xl text-indigo-900 mb-1">{t.name} {t.flag}</h3>
+<div className="flex items-center gap-1 text-yellow-500 mb-4"><Icon name="star" size={14} fill="currentColor" /> {t.rating}</div>
+<p className="text-gray-600 text-sm leading-relaxed">{t.bio}</p>
+</div>
+<button onClick={() => setPage('pricing')} className="w-full py-4 bg-gray-50 text-indigo-600 font-bold hover:bg-indigo-50 border-t">View Pricing</button>
+</div>
+))}
+</div>
+</div>
+);
 
-                            {/* WHATSAPP LINK (wa.me) */}
-                            <a href="https://wa.me/2348026574515" target="_blank" className="flex items-center gap-4 hover:text-teal-400 transition cursor-pointer">
-                                <Icon name="phone" className="text-teal-400" />
-                                <div><p className="text-xs text-indigo-300">WhatsApp / Phone</p><p className="font-bold">+234 802 657 4515</p></div>
-                            </a>
-                        </div>
-                    </div>
+const App = () => {
+const [currentPage, setCurrentPage] = useState('home');
+const [market, setMarket] = useState('english');
+const config = MARKET_CONFIG[market];
 
-                    {/* RIGHT SIDE: SOCIAL MEDIA */}
-                    <div className="space-y-6 bg-white p-8 rounded-2xl shadow-md border border-gray-100">
-                        <h3 className="text-xl font-bold border-b pb-4">Social Media</h3>
-                        <div className="space-y-4">
-                            
-                            {/* FACEBOOK */}
-                            <a href="https://www.facebook.com/ScriptPrecision" target="_blank" className="flex items-center gap-4 text-gray-700 hover:text-teal-600 cursor-pointer transition">
-                                <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center"><Icon name="facebook" size={18} /></div>
-                                <span className="font-medium">Facebook</span>
-                            </a>
+useEffect(() => { window.scrollTo(0, 0); }, [currentPage]);
 
-                            {/* LINKEDIN */}
-                            <a href="https://www.linkedin.com/company/script-precision" target="_blank" className="flex items-center gap-4 text-gray-700 hover:text-teal-600 cursor-pointer transition">
-                                <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center"><Icon name="linkedin" size={18} /></div>
-                                <span className="font-medium">LinkedIn</span>
-                            </a>
+return (
+<div className="min-h-screen flex flex-col text-gray-900">
+<Navbar setPage={setCurrentPage} market={market} setMarket={setMarket} />
+<main className="flex-grow">
+{currentPage === 'home' && <LandingPage setPage={setCurrentPage} config={config} />}
+{currentPage === 'pricing' && (
+<div className="py-20 text-center px-6">
+<h2 className="text-4xl font-black text-indigo-900 mb-10">Pricing for {config.label}</h2>
+<div className="bg-white rounded-3xl shadow-2xl p-12 border-4 border-teal-500 inline-block w-full max-w-md">
+<span className="text-7xl font-black text-indigo-900">{config.currency}{config.price}</span>
+<p className="text-gray-500 font-medium mb-8">per {config.duration} lesson</p>
+<button onClick={() => setPage('signup')} className="w-full py-4 bg-indigo-900 text-white rounded-2xl font-bold shadow-lg">Buy Credits Now</button>
+</div>
+</div>
+)}
+{currentPage === 'about' && <AboutPage />}
+{currentPage === 'connect' && <ConnectPage config={config} />}
+{currentPage === 'signup' && (
+<div className="py-20 text-center max-w-xl mx-auto px-6">
+<Icon name="mail" size={48} className="mx-auto mb-6 text-teal-500" />
+<h2 className="text-3xl font-bold mb-4 text-indigo-900">Ready to Start?</h2>
+<p className="text-gray-600 mb-8">Simply send us an email to set up your account and get your Student ID.</p>
+<div className="bg-indigo-900 text-white p-8 rounded-2xl font-mono text-xl shadow-xl">{config.contactMethod}</div>
+</div>
+)}
+{currentPage === 'tutors' && (
+<div className="py-20 max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+{TEACHERS.map(t => (
+<div key={t.id} className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center">
+<img src={t.avatar} className="w-32 h-32 rounded-full mb-6 object-cover" />
+<h3 className="font-bold text-2xl mb-2">{t.name}</h3>
+<p className="text-teal-600 font-bold text-xs mb-4 uppercase tracking-widest">{t.specialty}</p>
+<p className="text-gray-600 text-center text-sm mb-6">{t.bio}</p>
+<button onClick={() => setPage('signup')} className="mt-auto w-full py-3 bg-indigo-900 text-white rounded-xl font-bold">Book Now</button>
+</div>
+))}
+</div>
+)}
+</main>
+<footer className="bg-indigo-900 text-white py-12 text-center text-sm">
+<p className="font-bold text-lg">Script Precision</p>
+<p className="opacity-60">Founded by Zudinah Ventures Group</p>
+</footer>
+</div>
+);
+};
 
-                            {/* INSTAGRAM (Placeholder) */}
-                            <a href="https://www.instagram.com" target="_blank" className="flex items-center gap-4 text-gray-700 hover:text-teal-600 cursor-pointer transition">
-                                <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center"><Icon name="instagram" size={18} /></div>
-                                <span className="font-medium">Instagram</span>
-                            </a>
-
-                            {/* XIAOHONGSHU (Manual) */}
-                            <div className="flex items-center gap-4 text-gray-700">
-                                <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center"><Icon name="globe" size={18} /></div>
-                                <span className="font-medium">Xiaohongshu: ScriptPrecision</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-
-        const LandingPage = ({ setPage, config }) => (
-          <div>
-            <header className="bg-indigo-900 text-white pt-24 pb-40 px-6 text-center">
-              <div className="max-w-4xl mx-auto">
-                <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">{config.heroTitle}</h1>
-                <p className="text-xl text-indigo-200 mb-10 max-w-2xl mx-auto leading-relaxed italic">"{config.heroSubtitle}"</p>
-                <button onClick={() => setPage('tutors')} className="px-10 py-5 bg-teal-500 text-indigo-900 font-black rounded-full text-xl shadow-2xl hover:bg-teal-400 transition transform hover:scale-105">
-                    Meet Your Tutors
-                </button>
-              </div>
-            </header>
-            <div className="max-w-6xl mx-auto -mt-20 px-6 grid md:grid-cols-3 gap-8 pb-20">
-                {TEACHERS.map(t => (
-                    <div key={t.id} className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
-                        <div className="p-8 flex flex-col items-center text-center flex-grow">
-                            <img src={t.avatar} className="w-32 h-32 rounded-full bg-indigo-50 mb-4 border-4 border-white shadow-md object-cover" />
-                            <h3 className="font-bold text-2xl text-indigo-900 mb-1">{t.name} {t.flag}</h3>
-                            <div className="flex items-center gap-1 text-yellow-500 mb-4"><Icon name="star" size={14} fill="currentColor" /> {t.rating}</div>
-                            <p className="text-gray-600 text-sm leading-relaxed">{t.bio}</p>
-                        </div>
-                        <button onClick={() => setPage('pricing')} className="w-full py-4 bg-gray-50 text-indigo-600 font-bold hover:bg-indigo-50 border-t">View Pricing</button>
-                    </div>
-                ))}
-            </div>
-          </div>
-        );
-
-        const App = () => {
-          const [currentPage, setCurrentPage] = useState('home');
-          const [market, setMarket] = useState('english');
-          const config = MARKET_CONFIG[market];
-
-          useEffect(() => { window.scrollTo(0, 0); }, [currentPage]);
-
-          return (
-            <div className="min-h-screen flex flex-col text-gray-900">
-              <Navbar setPage={setCurrentPage} market={market} setMarket={setMarket} />
-              <main className="flex-grow">
-                {currentPage === 'home' && <LandingPage setPage={setCurrentPage} config={config} />}
-                {currentPage === 'pricing' && (
-                    <div className="py-20 text-center px-6">
-                        <h2 className="text-4xl font-black text-indigo-900 mb-10">Pricing for {config.label}</h2>
-                        <div className="bg-white rounded-3xl shadow-2xl p-12 border-4 border-teal-500 inline-block w-full max-w-md">
-                            <span className="text-7xl font-black text-indigo-900">{config.currency}{config.price}</span>
-                            <p className="text-gray-500 font-medium mb-8">per {config.duration} lesson</p>
-                            <button onClick={() => setPage('signup')} className="w-full py-4 bg-indigo-900 text-white rounded-2xl font-bold shadow-lg">Buy Credits Now</button>
-                        </div>
-                    </div>
-                )}
-                {currentPage === 'about' && <AboutPage />}
-                {currentPage === 'connect' && <ConnectPage config={config} />}
-                {currentPage === 'signup' && (
-                    <div className="py-20 text-center max-w-xl mx-auto px-6">
-                        <Icon name="mail" size={48} className="mx-auto mb-6 text-teal-500" />
-                        <h2 className="text-3xl font-bold mb-4 text-indigo-900">Ready to Start?</h2>
-                        <p className="text-gray-600 mb-8">Simply send us an email to set up your account and get your Student ID.</p>
-                        <div className="bg-indigo-900 text-white p-8 rounded-2xl font-mono text-xl shadow-xl">{config.contactMethod}</div>
-                    </div>
-                )}
-                {currentPage === 'tutors' && (
-                    <div className="py-20 max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-                         {TEACHERS.map(t => (
-                            <div key={t.id} className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center">
-                                <img src={t.avatar} className="w-32 h-32 rounded-full mb-6 object-cover" />
-                                <h3 className="font-bold text-2xl mb-2">{t.name}</h3>
-                                <p className="text-teal-600 font-bold text-xs mb-4 uppercase tracking-widest">{t.specialty}</p>
-                                <p className="text-gray-600 text-center text-sm mb-6">{t.bio}</p>
-                                <button onClick={() => setPage('signup')} className="mt-auto w-full py-3 bg-indigo-900 text-white rounded-xl font-bold">Book Now</button>
-                            </div>
-                        ))}
-                    </div>
-                )}
-              </main>
-              <footer className="bg-indigo-900 text-white py-12 text-center text-sm">
-                <p className="font-bold text-lg mb-2">Script Precision</p>
-                <p className="opacity-60 mb-6">Founded by Zudinah Ventures Group</p>
-                
-                {/* Social Icons in Footer */}
-                <div className="flex justify-center gap-6">
-                    <a href="https://www.facebook.com/ScriptPrecision" target="_blank" className="hover:text-teal-400 transition"><Icon name="facebook" size={20} /></a>
-                    <a href="https://wa.me/2348026574515" target="_blank" className="hover:text-green-400 transition"><Icon name="phone" size={20} /></a>
-                    <a href="mailto:ScriptPrecision@Gmail.com" className="hover:text-red-400 transition"><Icon name="mail" size={20} /></a>
-                </div>
-              </footer>
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
 </body>
 </html>
-
-
 
 
 
