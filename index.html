@@ -126,36 +126,65 @@
           </div>
         );
 
-        const ConnectPage = ({ config }) => (
+       const ConnectPage = ({ config }) => (
             <div className="max-w-5xl mx-auto py-20 px-6">
                 <h1 className="text-4xl font-extrabold text-center mb-12 text-indigo-900">Connect With Us</h1>
                 <div className="grid md:grid-cols-2 gap-10">
+                    
+                    {/* LEFT SIDE: DIRECT CONTACT */}
                     <div className="bg-indigo-900 text-white p-8 rounded-2xl shadow-xl space-y-6">
                         <h3 className="text-xl font-bold border-b border-indigo-700 pb-4">Direct Contact</h3>
                         <div className="space-y-6">
-                            <div className="flex items-center gap-4">
+                            
+                            {/* EMAIL LINK (mailto:) */}
+                            <a href="mailto:ScriptPrecision@Gmail.com" className="flex items-center gap-4 hover:text-teal-400 transition cursor-pointer">
                                 <Icon name="mail" className="text-teal-400" />
                                 <div><p className="text-xs text-indigo-300">Email Address</p><p className="font-bold">ScriptPrecision@Gmail.com</p></div>
-                            </div>
+                            </a>
+
+                            {/* WECHAT (Copy Instruction) */}
                             <div className="flex items-center gap-4">
                                 <Icon name="message-square" className="text-teal-400" />
                                 <div><p className="text-xs text-indigo-300">WeChat ID</p><p className="font-bold">ScriptPrecision</p></div>
                             </div>
-                            <div className="flex items-center gap-4">
+
+                            {/* WHATSAPP LINK (wa.me) */}
+                            <a href="https://wa.me/2348026574515" target="_blank" className="flex items-center gap-4 hover:text-teal-400 transition cursor-pointer">
                                 <Icon name="phone" className="text-teal-400" />
-                                <div><p className="text-xs text-indigo-300">WhatsApp / Phone</p><p className="font-bold">+234 8026574515</p></div>
-                            </div>
+                                <div><p className="text-xs text-indigo-300">WhatsApp / Phone</p><p className="font-bold">+234 802 657 4515</p></div>
+                            </a>
                         </div>
                     </div>
+
+                    {/* RIGHT SIDE: SOCIAL MEDIA */}
                     <div className="space-y-6 bg-white p-8 rounded-2xl shadow-md border border-gray-100">
                         <h3 className="text-xl font-bold border-b pb-4">Social Media</h3>
                         <div className="space-y-4">
-                            {['instagram', 'facebook', 'linkedin', 'globe'].map(icon => (
-                                <div key={icon} className="flex items-center gap-4 text-gray-700 hover:text-teal-600 cursor-pointer transition">
-                                    <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center"><Icon name={icon} size={18} /></div>
-                                    <span className="font-medium capitalize">{icon === 'globe' ? 'Xiaohongshu' : icon}</span>
-                                </div>
-                            ))}
+                            
+                            {/* FACEBOOK */}
+                            <a href="https://www.facebook.com/ScriptPrecision" target="_blank" className="flex items-center gap-4 text-gray-700 hover:text-teal-600 cursor-pointer transition">
+                                <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center"><Icon name="facebook" size={18} /></div>
+                                <span className="font-medium">Facebook</span>
+                            </a>
+
+                            {/* LINKEDIN */}
+                            <a href="https://www.linkedin.com/company/script-precision" target="_blank" className="flex items-center gap-4 text-gray-700 hover:text-teal-600 cursor-pointer transition">
+                                <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center"><Icon name="linkedin" size={18} /></div>
+                                <span className="font-medium">LinkedIn</span>
+                            </a>
+
+                            {/* INSTAGRAM (Placeholder) */}
+                            <a href="https://www.instagram.com" target="_blank" className="flex items-center gap-4 text-gray-700 hover:text-teal-600 cursor-pointer transition">
+                                <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center"><Icon name="instagram" size={18} /></div>
+                                <span className="font-medium">Instagram</span>
+                            </a>
+
+                            {/* XIAOHONGSHU (Manual) */}
+                            <div className="flex items-center gap-4 text-gray-700">
+                                <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center"><Icon name="globe" size={18} /></div>
+                                <span className="font-medium">Xiaohongshu: ScriptPrecision</span>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -236,18 +265,23 @@
                 )}
               </main>
               <footer className="bg-indigo-900 text-white py-12 text-center text-sm">
-                <p className="font-bold text-lg">Script Precision</p>
-                <p className="opacity-60">Founded by Zudinah Ventures Group</p>
+                <p className="font-bold text-lg mb-2">Script Precision</p>
+                <p className="opacity-60 mb-6">Founded by Zudinah Ventures Group</p>
+                
+                {/* Social Icons in Footer */}
+                <div className="flex justify-center gap-6">
+                    <a href="https://www.facebook.com/ScriptPrecision" target="_blank" className="hover:text-teal-400 transition"><Icon name="facebook" size={20} /></a>
+                    <a href="https://wa.me/2348026574515" target="_blank" className="hover:text-green-400 transition"><Icon name="phone" size={20} /></a>
+                    <a href="mailto:ScriptPrecision@Gmail.com" className="hover:text-red-400 transition"><Icon name="mail" size={20} /></a>
+                </div>
               </footer>
-            </div>
-          );
-        };
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
 </body>
 </html>
+
 
 
 
